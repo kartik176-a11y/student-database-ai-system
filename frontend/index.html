@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Database AI</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">🎓</div>
+
+            <div>
+                <h2>Student AI</h2>
+                <span>Database System</span>
+            </div>
+        </div>
+
+        <nav>
+
+            <button class="nav-item active"
+                    onclick="showSection('dashboard')">
+                🏠 Dashboard
+            </button>
+
+            <button class="nav-item"
+                    onclick="showSection('students')">
+                👨‍🎓 Students
+            </button>
+
+            <button class="nav-item"
+                    onclick="showSection('chat')">
+                🤖 AI Assistant
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="system-status">
+                <span class="status-dot"></span>
+                API Connected
+            </div>
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- TOP BAR -->
+        <header class="topbar">
+
+            <div>
+                <h1 id="page-title">Dashboard</h1>
+
+                <p>
+                    Student Database Management System
+                </p>
+            </div>
+
+            <div class="top-actions">
+
+                <button class="refresh-btn"
+                        onclick="loadStudents()">
+                    🔄 Refresh
+                </button>
+
+                <button class="add-btn add-student-btn">
+                    ➕ Add Student
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <!-- DASHBOARD -->
+        <section id="dashboard"
+                 class="section active-section">
+
+            <div class="welcome-card">
+
+                <div>
+
+                    <span class="welcome-label">
+                        WELCOME BACK 👋
+                    </span>
+
+                    <h2>
+                        Student Database
+                        <span>AI System</span>
+                    </h2>
+
+                    <p>
+                        Manage students, explore data and
+                        interact with your AI-powered
+                        database assistant.
+                    </p>
+
+                </div>
+
+                <div class="welcome-icon">
+                    🎓
+                </div>
+
+            </div>
+
+
+            <!-- STATISTICS -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <div class="stat-icon blue">
+                        👨‍🎓
+                    </div>
+
+                    <div>
+                        <p>Total Students</p>
+                        <h2 id="totalStudents">0</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon purple">
+                        ♂️
+                    </div>
+
+                    <div>
+                        <p>Male Students</p>
+                        <h2 id="maleStudents">0</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon pink">
+                        ♀️
+                    </div>
+
+                    <div>
+                        <p>Female Students</p>
+                        <h2 id="femaleStudents">0</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-icon orange">
+                        📚
+                    </div>
+
+                    <div>
+                        <p>Courses</p>
+                        <h2 id="courseCount">0</h2>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RECENT STUDENTS -->
+            <div class="content-card">
+
+                <div class="card-header">
+
+                    <div>
+                        <h2>Recent Students</h2>
+
+                        <p>
+                            Latest records from the database
+                        </p>
+                    </div>
+
+                    <button class="view-btn"
+                            onclick="showSection('students')">
+                        View All →
+                    </button>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Course</th>
+                                <th>Year</th>
+                                <th>Email</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="dashboardTable">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- STUDENTS -->
+        <section id="students"
+                 class="section">
+
+            <div class="content-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            👨‍🎓 Student Management
+                        </h2>
+
+                        <p>
+                            Create, update and delete
+                            student records
+                        </p>
+
+                    </div>
+
+
+                    <button class="add-btn add-student-btn">
+                        ➕ Add Student
+                    </button>
+
+                </div>
+
+
+                <!-- SEARCH -->
+                <div class="search-box">
+
+                    <span>🔍</span>
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search students..."
+                        onkeyup="searchStudents()">
+
+                </div>
+
+
+                <!-- STUDENT TABLE -->
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Age</th>
+                                <th>Gender</th>
+                                <th>Email</th>
+                                <th>Course</th>
+                                <th>Year</th>
+                                <th>Phone</th>
+                                <th>Actions</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody id="studentTable">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- AI CHAT -->
+        <section id="chat"
+                 class="section">
+
+            <div class="chat-container">
+
+                <div class="chat-header">
+
+                    <div class="ai-avatar">
+                        🤖
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Student Database AI
+                        </h2>
+
+                        <p>
+                            Powered by LangGraph + ChromaDB
+                        </p>
+
+                    </div>
+
+                    <span class="online">
+                        ● Online
+                    </span>
+
+                </div>
+
+
+                <div class="chat-messages"
+                     id="chatMessages">
+
+                    <div class="message ai-message">
+
+                        <div class="message-avatar">
+                            🤖
+                        </div>
+
+                        <div class="message-content">
+
+                            <p>
+                                Hello! 👋 I'm your Student
+                                Database AI Assistant.
+                            </p>
+
+                            <p>
+                                Ask me things like:
+                            </p>
+
+                            <ul>
+
+                                <li>
+                                    How many students are there?
+                                </li>
+
+                                <li>
+                                    Show all students
+                                </li>
+
+                                <li>
+                                    How many male students?
+                                </li>
+
+                                <li>
+                                    Show Computer Science students
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="chat-input-area">
+
+                    <input
+                        type="text"
+                        id="chatInput"
+                        placeholder="Ask something about the students..."
+                        onkeydown="handleChatKey(event)">
+
+                    <button onclick="sendMessage()">
+                        ➤
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- STUDENT MODAL -->
+<div class="modal"
+     id="studentModal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <div>
+
+                <h2 id="modalTitle">
+                    ➕ Add Student
+                </h2>
+
+                <p>
+                    Enter student information
+                </p>
+
+            </div>
+
+            <button class="close-btn"
+                    onclick="closeStudentModal()">
+                ✕
+            </button>
+
+        </div>
+
+
+        <form id="studentForm">
+
+            <input type="hidden"
+                   id="studentId">
+
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        autocomplete="name"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="age">
+                        Age
+                    </label>
+
+                    <input
+                        type="number"
+                        id="age"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="gender">
+                        Gender
+                    </label>
+
+                    <select id="gender"
+                            required>
+
+                        <option value="">
+                            Select Gender
+                        </option>
+
+                        <option value="Male">
+                            Male
+                        </option>
+
+                        <option value="Female">
+                            Female
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        autocomplete="email"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="course">
+                        Course
+                    </label>
+
+                    <input
+                        type="text"
+                        id="course"
+                        placeholder="Computer Science"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="year">
+                        Year
+                    </label>
+
+                    <input
+                        type="number"
+                        id="year"
+                        min="1"
+                        max="5"
+                        required>
+
+                </div>
+
+
+                <div class="form-group full-width">
+
+                    <label for="phone">
+                        Phone
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        autocomplete="tel"
+                        required>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="cancel-btn"
+                    onclick="closeStudentModal()">
+
+                    Cancel
+
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="save-btn">
+
+                    💾 Save Student
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+<script src="script.js"></script>
+
+</body>
+</html>
